@@ -187,8 +187,3 @@ async function playFireworkSound() {
     // Visual confetti remains available if the browser cannot play audio.
   }
 }
-
-document.querySelector('#fireworks').addEventListener('click', () => {
-  celebrate();
-  void playFireworkSound();
-});
