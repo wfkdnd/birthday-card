@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#faf4ec">
+  <meta name="description" content="一份给你的生日祝福。愿新的一岁，有喜欢的事，有想见的人，也有许多值得开心的小事。">
+  <title>给你 · 生日快乐</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="confetti" aria-hidden="true"></canvas>
+  <div class="page">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="生日贺卡首页"><span class="brand-star">✳</span> A LITTLE WISH, JUST FOR YOU</a>
+      <button class="sound-toggle" id="sound" type="button" aria-pressed="false"><span aria-hidden="true">♫</span> <span id="sound-label">音乐关</span></button>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="title">
+        <div class="balloon balloon-left" aria-hidden="true"><i></i></div>
+        <div class="balloon balloon-right" aria-hidden="true"><i></i></div>
+        <span class="spark spark-one" aria-hidden="true">✦</span>
+        <span class="spark spark-two" aria-hidden="true">✧</span>
+        <span class="spark spark-three" aria-hidden="true">✳</span>
+        <span class="small-star" aria-hidden="true">✧</span>
+
+        <div class="eyebrow"><span></span> TODAY IS ALL ABOUT YOU <span></span></div>
+        <h1 id="title">Happy <em>Birthday!</em></h1>
+        <p class="hero-subtitle">愿新的一岁，有很多值得开心的小事。</p>
+        <p class="sender-note">一份认真准备的生日祝福 <span aria-hidden="true">✧</span></p>
+
+        <div class="celebration-stage">
+        <div class="cake-scene" id="cake-scene">
+          <div class="cake-halo" aria-hidden="true"></div>
+          <div class="hand-note note-left" aria-hidden="true">a little wish,<br>a lot of love <span>⤵</span></div>
+          <div class="cake-art" role="img" aria-label="一个有五根蜡烛的草莓奶油生日蛋糕，点亮时从左到右呈现亮灭亮灭亮，表示 10101">
+            <div class="candles" aria-hidden="true">
+              <div class="candle" data-bit="1"><span class="flame"></span><span class="wick"></span></div>
+              <div class="candle" data-bit="0"><span class="flame"></span><span class="wick"></span></div>
+              <div class="candle" data-bit="1"><span class="flame"></span><span class="wick"></span></div>
+              <div class="candle" data-bit="0"><span class="flame"></span><span class="wick"></span></div>
+              <div class="candle" data-bit="1"><span class="flame"></span><span class="wick"></span></div>
+            </div>
+            <div class="cake-top"><span class="cherry cherry-one"></span><span class="cherry cherry-two"></span><span class="cherry cherry-three"></span></div>
+            <div class="cake-body"><div class="icing"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><div class="cake-stripe"></div><span class="sprinkle s1"></span><span class="sprinkle s2"></span><span class="sprinkle s3"></span><span class="sprinkle s4"></span><span class="sprinkle s5"></span><span class="sprinkle s6"></span></div>
+            <div class="cake-bottom"></div><div class="plate"></div><div class="plate-foot"></div>
+          </div>
+          <div class="hand-note note-right" aria-hidden="true">made just<br>for you ♡</div>
+          <span class="scene-dot dot-one" aria-hidden="true"></span><span class="scene-dot dot-two" aria-hidden="true"></span>
+        </div>
+        </div>
+
+        <div class="wish-controls">
+          <p id="instruction" aria-live="polite">仪式感准备好了，就差你的小小心愿。</p>
+          <button class="primary-button" id="wish" type="button"><span id="wish-icon" aria-hidden="true">✧</span> <span id="wish-label">点亮蜡烛，许个愿</span><span aria-hidden="true">↗</span></button>
+          <span class="tiny-note" id="tiny-note">闭上眼睛，把愿望交给烛光</span>
+        </div>
+      </section>
+
+      <section class="letter-section" aria-label="生日祝福">
+        <div class="section-label"><span>01 / A NOTE FOR YOU</span><span>WRITTEN JUST FOR YOU</span></div>
+        <div class="letter-layout">
+          <div class="letter-intro"><span class="mini-flower" aria-hidden="true">✳</span><h2>把祝福写下来，<br>在今天送给你。</h2><p>有几句话，想借着生日说给你听。</p></div>
+          <button class="envelope" id="letter" type="button" aria-haspopup="dialog"><span class="envelope-flap"></span><span class="seal" aria-hidden="true">♡</span><span class="envelope-hint">拆开这份小小心意 <span>↗</span></span></button>
+        </div>
+      </section>
+      <footer><span>A BIRTHDAY WISH, WRITTEN WITH CARE.</span><span>愿你的故事，总有值得期待的下一页 <span class="footer-heart">♡</span></span></footer>
+      <p class="github-follow"><a href="https://github.com/wfkdnd" target="_blank" rel="noopener noreferrer">github.com/wfkdnd ↗</a></p>
+      <p class="page-key"><span aria-hidden="true">⌁</span> 一把小钥匙：<strong>0xBF</strong><span class="key-caption">留给信末的小秘密 · XOR</span></p>
+      <div class="art-credit">插画：<a href="https://github.com/Apprentice-Geo/AI-Fanworks/blob/ee1f5176710f3bcfd60ee5cb0af00f77ed96748e/ApprenTice/AI-Girls-and-Chibis/ChatGPT-Chibi.png" target="_blank" rel="noopener noreferrer">ApprenTice</a> · 参考角色设计：ZipZipPipe · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-NC-SA 4.0</a> · 非官方同人插画</div>
+      <div class="art-credit">插画：<a href="https://github.com/YunYueSama/codex-deepseek-pet" target="_blank" rel="noopener noreferrer">YunYueSama</a> · 大肥鱼项目署名许可 1.0 · 非官方同人插画</div>
+    </main>
+  </div>
+
+  <dialog id="letter-dialog" aria-labelledby="letter-title">
+    <button class="close-dialog" id="close-dialog" type="button" aria-label="关闭祝福信">×</button>
+    <span class="letter-flower" aria-hidden="true">✳</span><p class="dialog-eyebrow">一封写给你的生日信</p>
+    <h2 id="letter-title">生日快乐呀。</h2>
+    <div class="letter-copy">
+      <p>想借着今天，认真送你几句祝福。<br>希望你看到这份小小的心意时，<br>嘴角能刚好扬起来一点。</p>
+      <p>愿新的一岁，你睡得安稳，吃得开心，<br>有时间做喜欢的事，也常常见到想见的人。<br>那些期待了很久的事情，都能慢慢有好消息。</p>
+      <p>愿你既有出发的勇气，也有靠岸的安心。<br>有想法的时候就试试，遇见难题也别着急，<br>换条路走走，或许就有新的风景。</p>
+      <p>希望你一直保留对世界的好奇，<br>按自己的节奏，过喜欢的生活。<br>认真做事，也记得好好吃饭、好好休息。</p>
+      <p>今天就好好享受蛋糕、礼物和祝福吧。<br>许愿的时候，可以稍微贪心一点，<br>把那些小小的、认真的期待都放进去。</p>
+      <p class="letter-ending">愿往后的日子，总有人记得你的喜好，<br>愿你的努力有回音，心事有人听。<br>希望你今天开心，明天也是。</p>
+    </div>
+    <div class="chatgpt-postscript"><span class="postscript-label">留给未来的你</span><p id="birthday-thought">你还没见过的风景里，一定有让你笑起来的那一处。</p><button id="another-thought" type="button">再收下一句祝福 <span aria-hidden="true">↗</span></button><span class="thought-status" id="thought-status" role="status"></span></div>
+    <div class="letter-sign">GPT，DS&amp;<button class="secret-signature" id="secret-signature" type="button" aria-expanded="false" aria-controls="signature-puzzle" aria-label="解开署名里的小秘密">E8F9F4</button></div>
+    <div class="signature-puzzle" id="signature-puzzle" hidden>
+      <p id="puzzle-hint">三个大写字母藏在十六进制数字里。<br>用网页底部的钥匙逐字节异或，再按 ASCII 读出名字。</p>
+      <form id="signature-form">
+        <label for="signature-key">钥匙</label>
+        <input id="signature-key" name="key" type="text" pattern="(0[xX])?[0-9a-fA-F]{1,2}" maxlength="4" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="0x00" required aria-describedby="puzzle-hint" aria-label="十六进制异或密钥">
+        <button type="submit">解开落款 <span aria-hidden="true">↗</span></button>
+      </form>
+      <p class="puzzle-result" id="puzzle-result" role="status"></p>
+    </div>
+  </dialog>
+
+  <aside class="companion-corner" aria-label="联合制作：GPT 与 DS">
+    <p class="companion-message" id="creator-comment" role="status" hidden></p>
+    <button class="companion-heading" id="creator-toggle" type="button" aria-controls="creator-comment" aria-expanded="false">联合制作</button>
+    <figure class="companion-mini companion-gpt"><img src="assets/gpt-dragon-chibi.png" width="941" height="1672" alt="银白长发、捧着星球仪的 Q 版角色"><figcaption>GPT</figcaption></figure>
+    <figure class="companion-mini companion-ds"><img src="assets/deepseek-whale-chibi.png" width="611" height="832" alt="蓝紫长发、微笑挥手的 Q 版角色"><figcaption>DS</figcaption></figure>
+  </aside>
+  <script src="script.js"></script>
+</body>
+</html>

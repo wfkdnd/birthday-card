@@ -1,0 +1,31 @@
+{
+  "id": "yunyuesama-deepseek-whale-chibi",
+  "character_id": "deepseek",
+  "collection": "yunyuesama-codex-deepseek-pet",
+  "title": "大肥鱼／鲸鱼娘 Q版（正面全身）",
+  "kind": "chibi-fullbody-front",
+  "path": "assets/deepseek-whale-chibi.png",
+  "width": 611,
+  "height": 832,
+  "has_transparency": true,
+  "bytes": 604458,
+  "creators": [
+    "YunYueSama（Q版形象作者）"
+  ],
+  "upstream_character_refs": [
+    "上善无形（上善）· 鲸鱼娘原始角色形象",
+    "ZipZipPipe · DeepSeek 女仆鲸鱼娘二次设计"
+  ],
+  "source_url": "https://github.com/YunYueSama/codex-deepseek-pet/blob/main/assets/whale/portrait.png",
+  "retrieved_url": "https://raw.githubusercontent.com/YunYueSama/codex-deepseek-pet/main/assets/whale/portrait.png",
+  "supplier": "YunYueSama/codex-deepseek-pet",
+  "license": {
+    "status": "author_declared",
+    "identifier": "大肥鱼项目署名许可 1.0（自定义许可，非标准 MIT）",
+    "attribution": "作者：YunYueSama；仓库：https://github.com/YunYueSama/codex-deepseek-pet",
+    "evidence_url": "https://github.com/YunYueSama/codex-deepseek-pet/blob/main/ASSET_LICENSE.md",
+    "note": "图片为作者有权授权的新增贡献；底层社区角色参考（上善无形、ZipZipPipe 等）仍归各自权利人，不代表 DeepSeek 官方授权。"
+  },
+  "modifications": "从上游 portrait.png（1024×1024 透明底）按透明像素包围盒裁剪为正面全身 Q 版，未改动像素内容。",
+  "collected_on": "2026-11-14"
+}

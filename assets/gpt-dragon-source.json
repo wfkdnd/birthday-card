@@ -1,0 +1,32 @@
+{
+  "id": "apprentice-chatgpt-chibi",
+  "character_id": "gpt",
+  "collection": "apprentice",
+  "title": "ApprenTice Q版",
+  "kind": "chibi-derivative",
+  "path": "assets/apprentice/gpt/apprentice-chatgpt-chibi.png",
+  "width": 941,
+  "height": 1672,
+  "has_transparency": false,
+  "bytes": 1924563,
+  "sha256": "546223ab14b24ae765a1ad6218a59379723a1bb057f3deddfedcde82193983c4",
+  "creators": [
+    "ApprenTice（AI辅助派生图）",
+    "ZipZipPipe（参考角色设计）"
+  ],
+  "source_url": "https://github.com/Apprentice-Geo/AI-Fanworks/blob/ee1f5176710f3bcfd60ee5cb0af00f77ed96748e/ApprenTice/AI-Girls-and-Chibis/ChatGPT-Chibi.png",
+  "retrieved_url": "https://raw.githubusercontent.com/Apprentice-Geo/AI-Fanworks/ee1f5176710f3bcfd60ee5cb0af00f77ed96748e/ApprenTice/AI-Girls-and-Chibis/ChatGPT-Chibi.png",
+  "supplier": "Apprentice-Geo/AI-Fanworks",
+  "supplier_commit_sha": "ee1f5176710f3bcfd60ee5cb0af00f77ed96748e",
+  "supplier_tree_sha": "f3ec125ec7ac7991f650c823fa4a84c836b85e68",
+  "upstream_path": "ApprenTice/AI-Girls-and-Chibis/ChatGPT-Chibi.png",
+  "license": {
+    "status": "author_declared",
+    "identifier": "CC-BY-NC-SA-4.0",
+    "evidence_url": "https://github.com/Apprentice-Geo/AI-Fanworks/blob/ee1f5176710f3bcfd60ee5cb0af00f77ed96748e/ApprenTice/AI-Girls-and-Chibis/README.md",
+    "note": "目录作者对自己的改编图像作此声明；其他第三方参考仍保留原作者条件，不将整仓作者目录统一授权。"
+  },
+  "modifications": "保留上游文件原始字节；仅安排本仓库路径。",
+  "collected_on": "2026-10-21",
+  "prompt_url": "https://github.com/Apprentice-Geo/AI-Fanworks/blob/ee1f5176710f3bcfd60ee5cb0af00f77ed96748e/ApprenTice/AI-Girls-and-Chibis/Prompts.md"
+}
