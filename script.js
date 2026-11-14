@@ -101,13 +101,13 @@ dialog.addEventListener('click', event => {
   if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) dialog.close();
 });
 
-// A two-line joke from the little production team.
+// Three remarks from the little production team, then back to the quiet corner.
 const creatorToggle = document.querySelector('#creator-toggle');
 const creatorComment = document.querySelector('#creator-comment');
-const creatorLines = ['其实我们才是第一作者', 'AI这么强咋办啊'];
+const creatorLines = ['其实我们才是第一作者', 'AI这么强咋办啊', '（其实还是一股AI味）'];
 let creatorClickCount = 0;
 creatorToggle.addEventListener('click', () => {
-  creatorClickCount = (creatorClickCount + 1) % 3;
+  creatorClickCount = (creatorClickCount + 1) % (creatorLines.length + 1);
   const expanded = creatorClickCount !== 0;
   creatorComment.textContent = expanded ? creatorLines[creatorClickCount - 1] : '';
   creatorComment.hidden = !expanded;
