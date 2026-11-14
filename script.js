@@ -70,6 +70,7 @@ wishButton.addEventListener('click', () => {
     instruction.textContent = '生日快乐！愿你的每一份期待，都慢慢实现。';
     tinyNote.textContent = '有一封写给你的信，就在下面的信封里 ♡';
     celebrate();
+    void playFireworkSound();
   } else {
     wishState = 'ready';
     wishButton.click();
@@ -104,7 +105,7 @@ dialog.addEventListener('click', event => {
 // Three remarks from the little production team, then back to the quiet corner.
 const creatorToggle = document.querySelector('#creator-toggle');
 const creatorComment = document.querySelector('#creator-comment');
-const creatorLines = ['其实我们才是第一作者', 'AI这么强咋办啊', '（其实还是一股AI味）'];
+const creatorLines = ['其实是一作和二作', 'AI这么强咋办啊', '（其实还是一股AI味）'];
 let creatorClickCount = 0;
 creatorToggle.addEventListener('click', () => {
   creatorClickCount = (creatorClickCount + 1) % (creatorLines.length + 1);
@@ -140,56 +141,54 @@ document.querySelector('#signature-form').addEventListener('submit', event => {
   puzzleResult.textContent = '找到啦。原来这份祝福里，还藏着一个熟悉的名字。';
 });
 
-// Music is synthesized locally and starts only after an explicit click.
+// A short firework burst and fading crackles, started only by a user click.
 let audioContext;
-let musicTimer;
-let musicOn = false;
-const soundButton = document.querySelector('#sound');
-const melody = [
-  [0,.75],[0,.25],[2,1],[0,1],[5,1],[4,2],
-  [0,.75],[0,.25],[2,1],[0,1],[7,1],[5,2],
-  [0,.75],[0,.25],[12,1],[9,1],[5,1],[4,1],[2,1],
-  [10,.75],[10,.25],[9,1],[5,1],[7,1],[5,2.5]
-];
-function scheduleMelody() {
-  let start = audioContext.currentTime + .1;
-  for (const [note, beats] of melody) {
-    const duration = beats * .4;
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
-    oscillator.type = 'sine';
-    oscillator.frequency.value = 261.63 * Math.pow(2, note / 12);
-    gain.gain.setValueAtTime(0, start);
-    gain.gain.linearRampToValueAtTime(.095, start + .012);
-    gain.gain.exponentialRampToValueAtTime(.001, start + duration * .92);
-    oscillator.connect(gain); gain.connect(audioContext.destination);
-    oscillator.start(start); oscillator.stop(start + duration);
-    oscillator.onended = () => { oscillator.disconnect(); gain.disconnect(); };
-    start += duration;
-  }
-  musicTimer = setTimeout(() => { if (musicOn) scheduleMelody(); }, (start - audioContext.currentTime + 1.5) * 1000);
-}
-soundButton.addEventListener('click', async () => {
-  soundButton.disabled = true;
+let fireworkNoise;
+let lastFireworkAt = -Infinity;
+
+async function playFireworkSound() {
   try {
-    if (!audioContext) {
-      const AudioEngine = window.AudioContext || window.webkitAudioContext;
-      if (!AudioEngine) throw new Error('Audio is unavailable');
-      audioContext = new AudioEngine();
+    const AudioEngine = window.AudioContext || window.webkitAudioContext;
+    if (!AudioEngine) return;
+    if (!audioContext) audioContext = new AudioEngine();
+    await audioContext.resume();
+    const now = audioContext.currentTime;
+    if (now - lastFireworkAt < .35) return;
+    lastFireworkAt = now;
+    if (!fireworkNoise) {
+      fireworkNoise = audioContext.createBuffer(1, Math.ceil(audioContext.sampleRate * 1.25), audioContext.sampleRate);
+      const samples = fireworkNoise.getChannelData(0);
+      for (let i = 0; i < samples.length; i++) samples[i] = Math.random() * 2 - 1;
     }
-    if (musicOn) {
-      clearTimeout(musicTimer);
-      await audioContext.close();
-      audioContext = null;
-      musicOn = false;
-    } else {
-      await audioContext.resume();
-      scheduleMelody();
-      musicOn = true;
+    function burst(delay, duration, frequency, volume) {
+      const start = now + .01 + delay;
+      const source = audioContext.createBufferSource();
+      const filter = audioContext.createBiquadFilter();
+      const gain = audioContext.createGain();
+      source.buffer = fireworkNoise;
+      filter.type = 'lowpass';
+      filter.Q.value = .5;
+      filter.frequency.setValueAtTime(frequency, start);
+      filter.frequency.exponentialRampToValueAtTime(Math.max(180, frequency * .2), start + duration);
+      gain.gain.setValueAtTime(0, start);
+      gain.gain.linearRampToValueAtTime(volume, start + .006);
+      gain.gain.exponentialRampToValueAtTime(.001, start + duration);
+      source.connect(filter); filter.connect(gain); gain.connect(audioContext.destination);
+      source.start(start, 0, duration);
+      source.stop(start + duration);
+      source.onended = () => { source.disconnect(); filter.disconnect(); gain.disconnect(); };
     }
-    soundButton.setAttribute('aria-pressed', String(musicOn));
-    document.querySelector('#sound-label').textContent = musicOn ? '音乐开' : '音乐关';
+    burst(0, .22, 600, .4);
+    burst(.04, 1.1, 5500, .16);
+    for (let i = 0; i < 7; i++) {
+      burst(.18 + Math.random() * .65, .035 + Math.random() * .055, 2500 + Math.random() * 4000, .04 + Math.random() * .06);
+    }
   } catch {
-    document.querySelector('#sound-label').textContent = '音乐暂不可用';
-  } finally { soundButton.disabled = false; }
+    // Visual confetti remains available if the browser cannot play audio.
+  }
+}
+
+document.querySelector('#fireworks').addEventListener('click', () => {
+  celebrate();
+  void playFireworkSound();
 });
