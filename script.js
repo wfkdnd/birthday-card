@@ -120,25 +120,49 @@ const signatureButton = document.querySelector('#secret-signature');
 const signaturePuzzle = document.querySelector('#signature-puzzle');
 const signatureKey = document.querySelector('#signature-key');
 const puzzleResult = document.querySelector('#puzzle-result');
+const signatureSubmit = document.querySelector('#signature-submit');
+const envelopeRecipient = document.querySelector('#envelope-recipient');
+let signatureStage = 'encrypted';
+let signatureBytes;
+let recipientBytes;
 signatureButton.addEventListener('click', () => {
   const expanded = signatureButton.getAttribute('aria-expanded') === 'true';
   signatureButton.setAttribute('aria-expanded', String(!expanded));
   signaturePuzzle.hidden = expanded;
-  if (!expanded) signatureKey.focus();
+  if (!expanded) {
+    if (signatureStage === 'encrypted') signatureKey.focus();
+    else signatureSubmit.focus();
+  }
 });
 document.querySelector('#signature-form').addEventListener('submit', event => {
   event.preventDefault();
+  if (signatureStage === 'decoded') return;
+  if (signatureStage === 'ascii') {
+    const name = String.fromCharCode(...signatureBytes);
+    signatureButton.textContent = name;
+    signatureButton.setAttribute('aria-label', '已解开的署名：' + name);
+    envelopeRecipient.textContent = 'To ' + String.fromCharCode(...recipientBytes) + ':';
+    signatureStage = 'decoded';
+    signatureSubmit.textContent = '已解开';
+    signatureSubmit.setAttribute('aria-disabled', 'true');
+    puzzleResult.textContent = '找到啦！';
+    return;
+  }
   const key = signatureKey.value.trim();
   if (!/^(?:0x)?[0-9a-f]{1,2}$/i.test(key) || parseInt(key, 16) !== 0xBF) {
     puzzleResult.textContent = '这把钥匙好像不合适，再看看网页底部？';
     return;
   }
-  const plaintext = [0xE8, 0xF9, 0xF4]
-    .map(byte => String.fromCharCode(byte ^ parseInt(key, 16)))
-    .join('');
-  signatureButton.textContent = plaintext;
-  signatureButton.setAttribute('aria-label', '已解开的署名：' + plaintext);
-  puzzleResult.textContent = '找到啦。原来这份祝福里，还藏着一个熟悉的名字。';
+  signatureBytes = [0xE8, 0xF9, 0xF4].map(byte => byte ^ parseInt(key, 16));
+  recipientBytes = [0xF7, 0xE7].map(byte => byte ^ parseInt(key, 16));
+  const toHex = bytes => bytes.map(byte => byte.toString(16).padStart(2, '0').toUpperCase()).join('');
+  signatureButton.textContent = toHex(signatureBytes);
+  signatureButton.setAttribute('aria-label', '署名的十六进制 ASCII：' + toHex(signatureBytes));
+  envelopeRecipient.textContent = 'To ' + toHex(recipientBytes) + ':';
+  signatureStage = 'ascii';
+  signatureKey.readOnly = true;
+  signatureSubmit.textContent = 'ASCII?';
+  puzzleResult.textContent = '';
 });
 
 // A short firework burst and fading crackles, started only by a user click.
